@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {
     Form,
     Input,
@@ -8,8 +8,7 @@ import {
   import '../less/index.less'
   import logo from '../images/PureRetail_Logo.png'
   
-  const RegistrationForm = (props) => {
-    const [confirmDirty, setConfirmDirty] = useState(false)
+  const Login = (props) => {
   
     const handleSubmit = e => {
       e.preventDefault();
@@ -18,28 +17,6 @@ import {
           console.log('Received values of form: ', values);
         }
       });
-    };
-  
-    const handleConfirmBlur = e => {
-      const { value } = e.target;
-      setConfirmDirty(!!value)
-    };
-  
-    const compareToFirstPassword = (rule, value, callback) => {
-      const { form } = props;
-      if (value && value !== form.getFieldValue('password')) {
-        callback('Two passwords that you enter is inconsistent!');
-      } else {
-        callback();
-      }
-    };
-  
-    const validateToNextPassword = (rule, value, callback) => {
-      const { form } = props;
-      if (value && confirmDirty) {
-        form.validateFields(['confirm'], { force: true });
-      }
-      callback();
     };
   
       const { getFieldDecorator } = props.form
@@ -74,7 +51,7 @@ import {
         </div>
         <Form {...formItemLayout} onSubmit={handleSubmit}>
             <div id="header">
-                <h2>Register new <br/> account</h2>
+                <h2>Log in</h2>
             </div>
           <Form.Item>
             {getFieldDecorator('number', {
@@ -99,44 +76,28 @@ import {
                   required: true,
                   message: 'Please input your password!',
                 },
-                {
-                  validator: validateToNextPassword,
-                },
               ],
             })(<Input.Password 
                 placeholder="Password"
                 prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 />)}
           </Form.Item>
-          <Form.Item hasFeedback>
-            {getFieldDecorator('confirm', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please confirm your password!',
-                },
-                {
-                  validator: compareToFirstPassword,
-                },
-              ],
-            })(<Input.Password onBlur={handleConfirmBlur} 
-                placeholder="Confirm Password"
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                />)}
-          </Form.Item>
           <Form.Item {...tailFormItemLayout}>
             <Button type="primary" htmlType="submit">
-              Register
+              Log in
             </Button>
           </Form.Item>
         </Form>
         <div id="or_login">
-            <p>or <a>login</a> instead</p>
+            <p>or <a>register</a> instead</p>
+        </div>
+        <div id="or_login">
+            <p><a>Forgot password?</a></p>
         </div>
         </div>
       );
   }
   
-  const WrappedRegistrationForm = Form.create({ name: 'register' })(RegistrationForm)
+  const LoginForm = Form.create({ name: 'register' })(Login)
 
-  export default WrappedRegistrationForm
+  export default LoginForm
