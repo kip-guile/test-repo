@@ -1,12 +1,16 @@
 import React, {useState} from 'react'
+import axios from 'axios'
 import {
     Form,
     Input,
     Icon,
     Button,
+    message
   } from 'antd';
   import '../less/index.less'
   import logo from '../images/PureRetail_Logo.png'
+
+  const signupURL = 'https://shopping-cart-eu3.herokuapp.com/api/auth/register'
   
   const RegistrationForm = (props) => {
     const [confirmDirty, setConfirmDirty] = useState(false)
@@ -14,9 +18,23 @@ import {
     const handleSubmit = e => {
       e.preventDefault();
       props.form.validateFieldsAndScroll((err, values) => {
+        const payload = {
+            phone: values.number,
+            password: values.password
+          }
         if (!err) {
-          console.log('Received values of form: ', values);
-        }
+            console.log(payload)
+          axios.post(signupURL, payload)
+          .then(res => {
+            message.success('Signed Up')
+            props.form.resetFields()
+          })
+          .catch(error => {
+            message.error(error.message)
+          })
+        } else {
+            message.error('Validation failed')
+          }
       });
     };
   

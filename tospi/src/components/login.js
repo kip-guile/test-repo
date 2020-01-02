@@ -1,21 +1,39 @@
 import React from 'react'
+import axios from 'axios'
 import {
     Form,
     Input,
     Icon,
     Button,
+    message
   } from 'antd';
   import '../less/index.less'
   import logo from '../images/PureRetail_Logo.png'
+
+  const loginURL = 'https://shopping-cart-eu3.herokuapp.com/api/auth/login'
   
   const Login = (props) => {
   
     const handleSubmit = e => {
       e.preventDefault();
       props.form.validateFieldsAndScroll((err, values) => {
+        const payload = {
+            phone: values.number,
+            password: values.password
+          }
         if (!err) {
-          console.log('Received values of form: ', values);
-        }
+            axios.post(loginURL, payload)
+            .then(res => {
+              message.success('Logged!')
+              localStorage.setItem('token', res.data.token)
+              props.history.push('/dashboard')
+            })
+            .catch(error => {
+                message.error(error.message)
+            })
+        } else {
+            message.error('Validation failed')
+          }
       });
     };
   
