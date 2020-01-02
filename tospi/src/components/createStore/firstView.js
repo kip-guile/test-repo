@@ -67,7 +67,11 @@ import {
         </div>
         <Form {...formItemLayout} onSubmit={handleSubmit}>
             <div id="header">
-                <h2>Lets get started</h2>
+                <h2 id="get-started">Lets get started!</h2>
+                <p>You're in! Let's get your account started in a few
+                  clicks. First, tell us how you'd like to be addressed
+                  and how you'd like to be paid.
+                </p>
             </div>
           <Form.Item>
             {getFieldDecorator('name', {
@@ -103,11 +107,9 @@ import {
             )}
           </Form.Item>
           <Form.Item {...tailFormItemLayout}>
-            {/* <NavLink to='/addlogo'> */}
                 <Button type="primary" htmlType="submit">
                 Next
                 </Button>
-            {/* </NavLink> */}
           </Form.Item>
         </Form>
         </div>

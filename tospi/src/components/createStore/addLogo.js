@@ -123,6 +123,12 @@ const AddLogo = (props) => {
   
       return (
         <div className="cover">
+            <div id="header">
+                <h2 id='get-started'>Upload store
+                    <br/>
+                    logo
+                </h2>
+            </div>
         <div>
             <Upload
                 name="avatar"
@@ -135,10 +141,19 @@ const AddLogo = (props) => {
             >
                 {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
             </Upload>
+            <div id='upload-text'>
+                <p>Click to upload
+                    <br/>
+                    store logo (optional)
+                </p>
+            </div>
         </div>
         <Form {...formItemLayout} onSubmit={handleSubmit}>
             <div id="header">
-                <h2>Lets get started</h2>
+                <h2 id='get-started'>Give your store
+                    <br/>
+                    a name
+                </h2>
             </div>
           <Form.Item>
             {getFieldDecorator('store', {

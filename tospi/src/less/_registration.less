@@ -7,6 +7,15 @@
     justify-content: space-around;
     align-items: center;
     font-family: "Lato", sans-serif;
+
+    input::placeholder {
+        color: @primary;
+    }
+}
+
+.ant-upload.ant-upload-select-picture-card {
+    border-radius: 10rem;
+    background-color: lightgray;
 }
 
 .ant-form.ant-form-horizontal {
@@ -24,7 +33,7 @@
     align-items: center;
 }
 
-.ant-row.ant-form-item:nth-child(5) > div {
+.ant-row.ant-form-item:nth-child(n) > div {
     margin-left: 0;
 }
 
@@ -40,6 +49,18 @@
     font-weight: bold;
     text-align: center;
     font-family: "Montserrat", sans-serif;
+
+    #get-started {
+        color: @secondary;
+    }
+
+    p {
+        font-size: 1.3rem;
+    }
+}
+
+#upload-text {
+    font-size: small;
 }
 
 #logo {
