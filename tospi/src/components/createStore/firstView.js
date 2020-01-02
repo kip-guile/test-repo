@@ -1,6 +1,5 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { NavLink } from 'react-router-dom'
 import {
     Form,
     Input,
@@ -11,6 +10,7 @@ import {
   import '../../less/index.less'
   import * as creators from '../../state/actionCreators'
   import logo from '../../images/PureRetail_Logo.png'
+  import history from '../../history'
 
   const { Option } = Select;
   
@@ -19,13 +19,16 @@ import {
     const dispatch = useDispatch()
   
     const handleSubmit = e => {
-      props.form.validateFieldsAndScroll((err, values) => {
+        e.preventDefault()
+      props.form.validateFieldsAndScroll({ force: true }, (err, values) => {
         const payload = {
             name: values.name,
             currency: values.currency
           }
         if (!err) {
+            console.log(payload)
             dispatch(creators.updateForm(payload))
+            history.push('/addlogo')
         } else {
             message.error('Validation failed')
           }
@@ -100,11 +103,11 @@ import {
             )}
           </Form.Item>
           <Form.Item {...tailFormItemLayout}>
-            <NavLink to='/addlogo'>
+            {/* <NavLink to='/addlogo'> */}
                 <Button type="primary" htmlType="submit">
                 Next
                 </Button>
-            </NavLink>
+            {/* </NavLink> */}
           </Form.Item>
         </Form>
         </div>
